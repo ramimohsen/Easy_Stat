@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -30,13 +31,12 @@ import net.proteanit.sql.DbUtils;
  */
 public class EasyStat extends javax.swing.JFrame {
 
-   
     private Connection connection = null;
     private PreparedStatement pst = null;
     private ResultSet res = null;
 
     public EasyStat() {
-       
+
         initComponents();
         init();
         connection = javaDBconnection.dbconection();
@@ -125,8 +125,11 @@ public class EasyStat extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButton_Signout = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton_Signout = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -189,18 +192,34 @@ public class EasyStat extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton_Signout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_logout_48698.png"))); // NOI18N
-        jButton_Signout.setText("Sign Out");
-        jButton_Signout.setToolTipText("Go to Login page");
-        jButton_Signout.setFocusable(false);
-        jButton_Signout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton_Signout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton_Signout.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_plus_1282963.png"))); // NOI18N
+        jButton3.setText("Add");
+        jButton3.setToolTipText("Add New Student");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_SignoutActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton_Signout);
+        jToolBar1.add(jButton3);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_icons_update_1564533.png"))); // NOI18N
+        jButton4.setText("Update");
+        jButton4.setToolTipText("Update Student Inforamtion ");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton4);
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_minus_1645995.png"))); // NOI18N
+        jButton5.setText("Delete");
+        jButton5.setToolTipText("Delete selected Student");
+        jButton5.setFocusable(false);
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton5);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_Button Info_58482.png"))); // NOI18N
         jButton1.setText("Online Help");
@@ -214,6 +233,19 @@ public class EasyStat extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton1);
+
+        jButton_Signout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_logout_48698.png"))); // NOI18N
+        jButton_Signout.setText("Sign Out");
+        jButton_Signout.setToolTipText("Go to Login page");
+        jButton_Signout.setFocusable(false);
+        jButton_Signout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton_Signout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton_Signout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SignoutActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton_Signout);
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
 
@@ -330,6 +362,7 @@ public class EasyStat extends javax.swing.JFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " System Commands", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         Search.setText("Search...");
+        Search.setToolTipText("Search by First name or ID");
         Search.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SearchMouseClicked(evt);
@@ -347,14 +380,29 @@ public class EasyStat extends javax.swing.JFrame {
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_edit_173002.png"))); // NOI18N
         btnEdit.setText("Edit");
         btnEdit.setToolTipText("Edit student information");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_Delete_1493279.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setToolTipText("Remove student");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnADD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_addthis_395263.png"))); // NOI18N
         btnADD.setText("Add");
         btnADD.setToolTipText("Add new student");
+        btnADD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnADDActionPerformed(evt);
+            }
+        });
 
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_edit-clear_118917.png"))); // NOI18N
         btnClear.setText("Clear");
@@ -920,10 +968,9 @@ public class EasyStat extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchMouseClicked
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-  ArrayList<JTextField>  s = new ArrayList<JTextField>()
-          {
-              {
-                   add(Age);
+        ArrayList<JTextField> s = new ArrayList<JTextField>() {
+            {
+                add(Age);
                 add(StudentFN);
                 add(Blood);
                 add(StudentLN);
@@ -932,12 +979,135 @@ public class EasyStat extends javax.swing.JFrame {
                 add(StudentID);
                 add(Height);
                 add(Weight);
-              }
-          };
-     s.stream().forEach(x -> x.setText(null));
-     Gender.setSelectedItem(null);
-  
+            }
+        };
+        s.stream().forEach(x -> x.setText(null));
+        Gender.setSelectedItem(null);
+
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnADDActionPerformed
+
+        String sql = "insert into Student_Info (Student_ID,First_name,Last_name,Department"
+                + ",Series,Age,Height,Weight,Gender,Blood)"
+                + "values(?,?,?,?,?,?,?,?,?,?)";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, StudentID.getText());
+            pst.setString(2, StudentFN.getText());
+            pst.setString(3, StudentLN.getText());
+            pst.setString(4, Department.getText());
+            pst.setString(5, Level.getText());
+            pst.setString(6, Age.getText());
+            pst.setString(7, Height.getText());
+            pst.setString(8, Weight.getText());
+            pst.setString(9, (String) Gender.getSelectedItem());
+            pst.setString(10, Blood.getText());
+            pst.execute();
+            JOptionPane.showMessageDialog(rootPane, "New Student Has been Saved Successfully");
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+
+        updatestudent();
+        updatestudentinforamtion();
+    }//GEN-LAST:event_btnADDActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            String sql = "insert into Student_Info (Student_ID,First_name,Last_name,Department"
+                    + ",Series,Age,Height,Weight,Gender,Blood)"
+                    + "values(?,?,?,?,?,?,?,?,?,?)";
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, StudentID.getText());
+            pst.setString(2, StudentFN.getText());
+            pst.setString(3, StudentLN.getText());
+            pst.setString(4, Department.getText());
+            pst.setString(5, Level.getText());
+            pst.setString(6, Age.getText());
+            pst.setString(7, Height.getText());
+            pst.setString(8, Weight.getText());
+            pst.setString(9, (String) Gender.getSelectedItem());
+            pst.setString(10, Blood.getText());
+            pst.execute();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+        }
+        updatestudent();
+        updatestudentinforamtion();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+
+        String sql = "update  Student_Info set First_name=?,Last_name=?,Department=?"
+                + ",Series=?,Age=?,Height=?,Weight=?,Gender=?,Blood=?"
+                + "where Student_ID=?";
+        try {
+            pst = connection.prepareStatement(sql);
+
+            pst.setString(1, StudentFN.getText());
+            pst.setString(2, StudentLN.getText());
+            pst.setString(3, Department.getText());
+            pst.setString(4, Level.getText());
+            pst.setString(5, Age.getText());
+            pst.setString(6, Height.getText());
+            pst.setString(7, Weight.getText());
+            pst.setString(8, (String) Gender.getSelectedItem());
+            pst.setString(9, Blood.getText());
+            pst.setString(10, StudentID.getText());
+
+            pst.execute();
+
+            JOptionPane.showMessageDialog(rootPane, "New Student Has been Saved Successfully");
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+
+        updatestudent();
+        updatestudentinforamtion();
+
+
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        int warning = JOptionPane.showConfirmDialog(rootPane, "Do you realy want to Delete ?", "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (warning == 0) {
+            String sql = "delete from Student_Info where Student_ID =?";
+            try {
+                pst = connection.prepareStatement(sql);
+                pst.setString(1, StudentID.getText());
+
+                pst.execute();
+
+                JOptionPane.showMessageDialog(rootPane, "Deleted");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane, ex);
+
+            }
+            updatestudent();
+            updatestudentinforamtion();
+              ArrayList<JTextField> s = new ArrayList<JTextField>() {
+            {
+                add(Age);
+                add(StudentFN);
+                add(Blood);
+                add(StudentLN);
+                add(Department);
+                add(Level);
+                add(StudentID);
+                add(Height);
+                add(Weight);
+            }
+        };
+        s.stream().forEach(x -> x.setText(null));
+        Gender.setSelectedItem(null);
+
+        }
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -990,6 +1160,9 @@ public class EasyStat extends javax.swing.JFrame {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton_Signout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
