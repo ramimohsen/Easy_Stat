@@ -873,7 +873,7 @@ public class EasyStat extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
 
         try {
-            OnlineHelp("https://github.com/ramimohsen");
+            OnlineHelp("https://github.com/ramimohsen/Easy_Stat");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
