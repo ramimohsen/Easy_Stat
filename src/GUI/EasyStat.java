@@ -34,7 +34,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import net.proteanit.sql.DbUtils;
 import org.ibex.nestedvm.util.Seekable;
-import sun.awt.image.ByteArrayImageSource;
 
 
 /*
